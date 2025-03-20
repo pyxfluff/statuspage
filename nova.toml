@@ -3,7 +3,3 @@ mapping    = ".:.build"
 
 [plugins.minify]
 suffixes   = [".html", ".css"]
-
-[plugins.minify.methods]
-#js  = "external"
-css = "external"
