@@ -1,7 +1,0 @@
-{
-    "name": "iipython-status-page",
-    "type": "module",
-    "dependencies": {
-        "csso-cli": "^4.0.2"
-    }
-}
