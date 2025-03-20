@@ -1,10 +1,9 @@
 [project]
 mapping    = ".:.build"
 
-#[plugins.minify]
-#suffixes   = [".html", ".js", ".css"]
+[plugins.minify]
+suffixes   = [".html", ".css"]
 
-# Use uglifyjs and csso for minification
-#[plugins.minify.methods]
+[plugins.minify.methods]
 #js  = "external"
-#css = "external"
+css = "external"
