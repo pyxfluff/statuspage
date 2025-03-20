@@ -1,12 +1,13 @@
 // Copyright (c) 2024 iiPython
 
 const services = [
-    { name: "Homepage", url: "https://notpyx.me" },
-    { name: "Music Server", url: "https://music.notpyx.me" },
-    { name: "Roblox Proxy", url: "https://rblx.notpyx.me" },
-    { name: "Administer AOS", url: "https://administer.notpyx.me" },
-    { name: "Administer Documentation", url: "https://docs.administer.notpyx.me" },
-    { name: "Administer AOS (canary)", url: "https://adm_unstable.notpyx.me" },
+    { name: "Homepage", url: "https://pyxfluff.dev" },
+    { name: "Music Server", url: "https://music.pyxfluff.dev" },
+    { name: "Roblox Proxy", url: "https://proxy.pyxfluff.dev" },
+    { name: "Administer root", url: "https://admsoftware.org" },
+    { name: "Administer docs", url: "https://docs.admsoftware.org" },
+    { name: "Administer Blog", url: "https://blog.admsoftware.org" },
+    { name: "Administer AOS canary", url: "https://aos-canary.admsoftware.org" },
 ];
 
 async function fetch_status() {
