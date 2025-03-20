@@ -4,6 +4,7 @@ const services = [
     { name: "Homepage", url: "https://pyxfluff.dev" },
     { name: "Music Server", url: "https://music.pyxfluff.dev" },
     { name: "Roblox Proxy", url: "https://proxy.pyxfluff.dev" },
+    { name: "Spotify Embed service", url: "https://spotifysvc.pyxfluff.dev" },
     { name: "Administer root", url: "https://admsoftware.org" },
     { name: "Administer docs", url: "https://docs.admsoftware.org" },
     { name: "Administer Blog", url: "https://blog.admsoftware.org" },
