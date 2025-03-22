@@ -107,7 +107,7 @@
             try {
                 for (let name in logs) add_service(data.urls.filter(u => u.name === name)[0].url, name, true, logs[name]);
             } catch (e) {
-                for (let name in logs) add_service("https://pyxfluff.dev", name, true, logs[name]);
+                for (let name in logs) add_service("https://pyxfluff.dev", `${name} &bullet; <span style="color: red;">Expiring soon</span>`, true, logs[name]);
             }
 
         } catch (e) {
