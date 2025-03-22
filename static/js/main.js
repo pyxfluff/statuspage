@@ -68,7 +68,7 @@
         header.innerHTML = `<a href = "${url}">${name}</a>`;
 
         // Process log frames
-        logs = [ ...Array(160 - logs.length).fill([0, "unknown", 0]), ...logs ];
+        logs = [...Array(160 - logs.length).fill([0, "unknown", 0]), ...logs];
         for (let i = 0; i < 160; i++) {
             let [timestamp, state, ping] = logs[i];
             make_box(container, timestamp, state, ping);
@@ -104,7 +104,11 @@
                     ]);
                 }
             }
-            for (let name in logs) add_service(data.urls.filter(u => u.name === name)[0].url, name, true, logs[name]);
+            try {
+                for (let name in logs) add_service(data.urls.filter(u => u.name === name)[0].url, name, true, logs[name]);
+            } catch (e) {
+                for (let name in logs) add_service("https://pyxfluff.dev", name, true, logs[name]);
+            }
 
         } catch (e) {
             console.warn(e);
