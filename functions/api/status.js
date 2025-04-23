@@ -19,7 +19,7 @@ export async function onRequestGet(context) {
         });
     } catch (e) {
         console.error(e);
-        return new Response("{}", {
+        return new Response(`{error: "${e}"}`, {
             status: 500,
             headers: {
                 "Content-Type": "application/json"
