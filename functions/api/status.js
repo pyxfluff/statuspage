@@ -4,10 +4,11 @@ export async function onRequestGet(context) {
         const records = await context.env.statuspage_data.get("records", { cacheTtl: 60 });
 
         const latestTimestamp = Math.max(...Object.keys(records).map(Number));
-        
+
         let newServices = {};
         for (const service of JSON.parse(urls)) {
             try {
+                service.__reference = latestTimestamp
                 service.status = records[latestTimestamp].services[service.name]?.online ? "Online" : "Offline";
             } catch {
                 service.status = "Migrating";
