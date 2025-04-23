@@ -8,11 +8,11 @@ export async function onRequestGet(context) {
 
         Object.values(JSON.parse(urls)).forEach((service) => {
             try {
-                service.status = records[0].services[service.name].online & "Online" ?? "Offline";
+                service.status = records[0].services[service.name]?.online ? "Online" : "Offline";
             } catch (e) {
-                service.status = "Migrating"
+                service.status = "Migrating";
             }
-        });        
+        });
 
         return new Response(JSON.stringify({
             urls: JSON.parse(urls),
