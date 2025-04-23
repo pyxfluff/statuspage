@@ -5,7 +5,7 @@ export async function onRequestGet(context) {
         const urls = await context.env.statuspage_data.get("urls", { cacheTtl: 60 });
         const records = await context.env.statuspage_data.get("records", { cacheTtl: 60 });
 
-        urls.forEach((service) => {
+        Object.values(urls).forEach((service) => {
             service.online = records[0].services[service.name].online;
         });        
 
