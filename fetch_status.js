@@ -1,21 +1,18 @@
 // Copyright (c) 2024 iiPython
+// also moreso pyxfluff 2025
 
 const services = [
     { name: "Homepage", url: "https://pyxfluff.dev" },
     { name: "Music Server", url: "https://music.pyxfluff.dev" },
     { name: "Roblox Proxy", url: "https://proxy.pyxfluff.dev" },
-    { name: "Spotify Embed service", url: "https://spotifysvc.pyxfluff.dev" },
-    { name: "Administer root", url: "https://admsoftware.org" },
-    { name: "Administer docs", url: "https://docs.admsoftware.org" },
+    { name: "Spotify Embed service", url: "https://spotifysvc.pyxfluff.dev/ping" },
     { name: "Administer Blog", url: "https://blog.admsoftware.org" },
-    { name: "Administer AOS canary", url: "https://aos-canary.admsoftware.org" },
+    { name: "Administer AOS canary", url: "https://aos-canary.admsoftware.org/api/ping" }
 ];
 
 async function fetch_status() {
     const slice = { time: Date.now() / 1000 | 0, services: {} };
     for (let { name, url } of services) {
-
-        // Make request
         const control = new AbortController();
         const timeout = setTimeout(control.abort, 10000);
 
@@ -25,9 +22,21 @@ async function fetch_status() {
             const up = (result.status === 200 || result.status === 404 || result.status === 302 || result.status === 400);
 
             clearTimeout(timeout);
-            slice.services[name] = up ? Math.round(performance.now() - start) : 0;
+            slice.services[name] = {
+                "online": up,
+                "latency": Math.round(performance.now() - start),
+                "statusCode": result.status,
+                "message": ""
+            }
 
-        } catch { slice.services[name] = 0; }
+        } catch {
+            slice.services[name] = {
+                "online": false,
+                "latency": 0,
+                "statusCode": 500,
+                "message": "Statuspage backend did not process this run."
+            }
+        }
     }
     return slice;
 }
@@ -39,7 +48,7 @@ export default {
 
             // Handle existing data
             let records = JSON.parse(await env.statuspage_data.get("records")) || [];
-            if (records.length === 160) records = records.slice(1);
+            if (records.length === 500) records = records.slice(1);
 
             // Go fetch status information
             records.push(await fetch_status());

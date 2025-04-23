@@ -2,12 +2,28 @@
 
 export async function onRequestGet(context) {
     try {
+        const urls = await context.env.statuspage_data.get("urls", { cacheTtl: 0 });
+        const records = await context.env.statuspage_data.get("records", { cacheTtl: 0 });
+
+        urls.forEach((service) => {
+            service.online = records[0].services[service.name].online;
+        });        
+
         return new Response(JSON.stringify({
-            urls: JSON.parse(await context.env.statuspage_data.get("urls", { cacheTtl: 900 })),
-            records: JSON.parse(await context.env.statuspage_data.get("records", { cacheTtl: 900 }))
-        }));
+            urls: JSON.parse(urls),
+            records: JSON.parse(records)
+        }), {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
     } catch (e) {
         console.error(e);
-        return new Response("{}", { status: 500 });
+        return new Response("{}", {
+            status: 500,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
     }
 }
