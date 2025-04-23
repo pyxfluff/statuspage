@@ -2,8 +2,8 @@
 
 export async function onRequestGet(context) {
     try {
-        const urls = await context.env.statuspage_data.get("urls", { cacheTtl: 0 });
-        const records = await context.env.statuspage_data.get("records", { cacheTtl: 0 });
+        const urls = await context.env.statuspage_data.get("urls", { cacheTtl: 60 });
+        const records = await context.env.statuspage_data.get("records", { cacheTtl: 60 });
 
         urls.forEach((service) => {
             service.online = records[0].services[service.name].online;
@@ -19,7 +19,7 @@ export async function onRequestGet(context) {
         });
     } catch (e) {
         console.error(e);
-        return new Response(`{error: "${e}"}`, {
+        return new Response(`{"error": "${e}"}`, {
             status: 500,
             headers: {
                 "Content-Type": "application/json"
