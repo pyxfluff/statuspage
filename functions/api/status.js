@@ -6,11 +6,15 @@ export async function onRequestGet(context) {
         const urls = await context.env.statuspage_data.get("urls", { cacheTtl: 60 });
         const records = await context.env.statuspage_data.get("records", { cacheTtl: 60 });
 
+        let newServices = [];
         Object.values(JSON.parse(urls)).forEach((service) => {
             try {
                 service.status = records[0].services[service.name]?.online ? "Online" : "Offline";
+                
+                newServices[service.name] = service
             } catch (e) {
                 service.status = "Migrating";
+                newServices[service.name] = service
             }
         });
 
