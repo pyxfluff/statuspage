@@ -3,13 +3,11 @@ export async function onRequestGet(context) {
         const urls = await context.env.statuspage_data.get("urls", { cacheTtl: 60 });
         const records = await context.env.statuspage_data.get("records", { cacheTtl: 60 });
 
-        const latestTimestamp = Math.max(...Object.keys(records).map(Number));
-
         let newServices = {};
         for (const service of JSON.parse(urls)) {
             try {
-                service.__reference = latestTimestamp
-                service.status = records[latestTimestamp].services[service.name]?.online ? "Online" : "Offline";
+                service.__reference = Object.keys(records).length - 1
+                service.status = records[Object.keys(records).length - 1].services[service.name]?.online ? "Online" : "Offline";
             } catch {
                 service.status = "Migrating";
             }
