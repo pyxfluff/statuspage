@@ -19,7 +19,7 @@ export async function onRequestGet(context) {
         });
 
         return new Response(JSON.stringify({
-            urls: JSON.parse(urls),
+            urls: newServices,
             records: JSON.parse(records)
         }), {
             headers: {
