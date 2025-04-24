@@ -9,9 +9,8 @@ send_metrics = false
 [observability]
 enabled = true
 
-# Fetch data every hour
 [triggers]
-crons = ["*/15 * * * *"]
+crons = ["* * * * *"]
 
 [dev]
 port=1241
