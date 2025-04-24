@@ -1,15 +1,17 @@
 export async function onRequestGet(context) {
     try {
-        const urls = await context.env.statuspage_data.get("urls", { cacheTtl: 60 });
-        const records = await context.env.statuspage_data.get("records", { cacheTtl: 60 });
+        const urls = JSON.parse(await context.env.statuspage_data.get("urls", { cacheTtl: 60 }));
+        const records = JSON.parse(await context.env.statuspage_data.get("records", { cacheTtl: 60 }));
+
+        console.log(urls)
 
         let newServices = {};
-        for (const service of JSON.parse(urls)) {
+        for (const service of urls) {
             try {
                 service.__reference = Object.keys(records).length - 1
                 service.status = records[Object.keys(records).length - 1].services[service.name]?.online ? "Online" : "Offline";
             } catch {
-                service.status = "Migrating";
+                service.status = "Error";
             }
 
             newServices[service.name] = service;
@@ -18,7 +20,7 @@ export async function onRequestGet(context) {
 
         return new Response(JSON.stringify({
             urls: newServices,
-            records: JSON.parse(records)
+            records: records
         }), {
             headers: {
                 "Content-Type": "application/json"

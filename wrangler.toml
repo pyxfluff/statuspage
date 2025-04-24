@@ -13,6 +13,9 @@ enabled = true
 [triggers]
 crons = ["*/15 * * * *"]
 
+[dev]
+port=1241
+
 # Setup KV
 [[kv_namespaces]]
 binding = "statuspage_data"
