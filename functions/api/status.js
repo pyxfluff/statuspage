@@ -23,7 +23,8 @@ export async function onRequestGet(context) {
             records: records
         }), {
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*" // i fucking hate cors so much
             }
         });
     } catch (e) {
@@ -31,7 +32,8 @@ export async function onRequestGet(context) {
         return new Response(`{"error": "${e}"}`, {
             status: 500,
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
             }
         });
     }
