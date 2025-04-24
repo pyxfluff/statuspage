@@ -9,6 +9,7 @@ export async function onRequestGet(context) {
         for (const service of urls) {
             try {
                 service.status = records[Object.keys(records).length - 1].services[service.name]?.online ? "Online" : "Offline";
+                service.latency = records[Object.keys(records).length - 1].services[service.name]?.latency
             } catch {
                 service.status = "Error";
             }
