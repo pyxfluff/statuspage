@@ -8,7 +8,6 @@ export async function onRequestGet(context) {
         let newServices = {};
         for (const service of urls) {
             try {
-                service.__reference = Object.keys(records).length - 1
                 service.status = records[Object.keys(records).length - 1].services[service.name]?.online ? "Online" : "Offline";
             } catch {
                 service.status = "Error";
