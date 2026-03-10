@@ -5,10 +5,15 @@ const services = [
     { name: "Homepage", url: "https://pyxfluff.dev" },
     { name: "Music Server", url: "https://music.pyxfluff.dev" },
     { name: "Roblox Proxy", url: "https://proxy.pyxfluff.dev" },
-    { name: "Spotify Embed service", url: "https://spotifysvc.pyxfluff.dev/ping" },
-    { name: "Administer Blog", url: "https://blog.admsoftware.org" },
-    { name: "Administer AOS canary", url: "https://aos-canary.admsoftware.org/api/ping" }
+    { name: "Spotify Embed Service", url: "https://spotifysvc.pyxfluff.dev/ping" },
+    { name: "Discourse Test Site", url: "https://blog.admsoftware.org" },
+    { name: "Nginx", url: "https://nginx.pyxfluff.dev" },
+    { name: "CDN", url: "https://cdn.pyxfluff.dev" }
 ];
+
+const warnings = {
+    "Spotify Embed Service": "Currently down due to stupid Spotify policy changes, looking into alternatives"
+}
 
 async function fetch_status() {
     const slice = { time: Date.now() / 1000 | 0, services: {} };
@@ -26,7 +31,7 @@ async function fetch_status() {
                 "online": up,
                 "latency": Math.round(performance.now() - start),
                 "statusCode": result.status,
-                "message": ""
+                "message": warnings[name] || ""
             }
 
         } catch {
