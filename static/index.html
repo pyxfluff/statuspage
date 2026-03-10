@@ -1,109 +1,127 @@
 <!doctype html>
-<html lang = "en">
-    <head>
-        <meta charset = "utf-8" />
-        <meta name = "viewport" content = "width=device-width, initial-scale=1" />
-        <meta name = "og:title" content = "Pyx / Statuspage" />
-        <meta name = "og:description" content = "Lightning fast, up-to-date status information." />
+<html lang="en">
 
-        <meta name = "theme-color" content = "#575f62" />
-        <meta name = "description" content = "Status page for all of Pyx's services. If you're having an issue you should check here first." />
-        <meta name = "darkreader-lock" />
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="og:title" content="Pyx / Statuspage" />
+    <meta name="og:description" content="Lightning fast, up-to-date status information." />
 
-        <!-- CSS --> 
-        <style type = "text/css">
-            @font-face {
-                font-family: "Fredoka";
-                font-style: normal;
-                font-weight: 400;
-                font-display: block;
-                src: url(/fonts/fredoka.woff2) format("woff2");
-            }
-            html, body {
-                color: #E7E5E2;
-                background-color: #181A1B;
-                font-family: "Fredoka", sans-serif;
-            }
-            table, #spinner {
-                border: none;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                border-spacing: 10px;
-                transform: translateX(-50%) translateY(-50%);
-            }
-            a {
-                color: #E7E5E2;
-                text-decoration: none;
-            }
-            footer {
-                left: 10px;
-                bottom: 10px;
-                position: absolute;
-            }
-            footer p {
-                margin: 0px;
-            }
+    <meta name="theme-color" content="#575f62" />
+    <meta name="darkreader-lock" />
+
+    <!-- CSS -->
+    <style type="text/css">
+        @font-face {
+            font-family: "Fredoka";
+            font-style: normal;
+            font-weight: 400;
+            font-display: block;
+            src: url(/fonts/fredoka.woff2) format("woff2");
+        }
+
+        html,
+        body {
+            color: #E7E5E2;
+            background-color: #181A1B;
+            font-family: "Fredoka", sans-serif;
+        }
+
+        table,
+        #spinner {
+            border: none;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            border-spacing: 10px;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        a {
+            color: #E7E5E2;
+            text-decoration: none;
+        }
+
+        footer {
+            left: 10px;
+            bottom: 10px;
+            position: absolute;
+        }
+
+        footer p {
+            margin: 0px;
+        }
+
+        h3#header {
+            top: 10px;
+            left: 10px;
+            margin: 0px;
+            position: absolute;
+        }
+
+        /* Mobile layout */
+        @media screen and (max-width: 700px) {
             h3#header {
-                top: 10px;
-                left: 10px;
-                margin: 0px;
-                position: absolute;
+                top: 30px;
+                left: 50%;
+                transform: translateX(-50%);
             }
 
-            /* Mobile layout */
-            @media screen and (max-width: 700px) {
-                h3#header {
-                    top: 30px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                }
-                footer {
-                    left: 50%;
-                    bottom: 30px;
-                    transform: translateX(-50%);
-                }
+            footer {
+                left: 50%;
+                bottom: 30px;
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Loading spinner */
+        #spinner {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+        }
+
+        #spinner:after {
+            content: " ";
+            display: block;
+            width: 22px;
+            height: 22px;
+            margin: 8px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            border-color: #fff transparent #fff transparent;
+            animation: loading 1.2s linear infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                transform: rotate(0deg);
             }
 
-            /* Loading spinner */
-            #spinner {
-                display: inline-block;
-                width: 80px;
-                height: 80px;
+            100% {
+                transform: rotate(360deg);
             }
-            #spinner:after {
-                content: " ";
-                display: block;
-                width: 22px;
-                height: 22px;
-                margin: 8px;
-                border-radius: 50%;
-                border: 2px solid #fff;
-                border-color: #fff transparent #fff transparent;
-                animation: loading 1.2s linear infinite;
-            }
-            @keyframes loading {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-        </style>
+        }
+    </style>
 
-        <!-- Icon & page title -->
-        <link rel = "icon" type = "image/x-icon" href = "/favicon.ico">
-        <title>Statuspage</title>
-    </head>
-    <body>
-        <h3 id = "header">Pyx's Statuspage</h3>
-        <div id = "spinner"></div>
-        <table><tbody></tbody></table>
-        <footer><a href = "https://pyxfluff.dev">< Return home</a></footer>
+    <!-- Icon & page title -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <title>Statuspage</title>
+</head>
 
-        <!-- Deferred CSS -->
-        <link rel = "preload" href = "/index.css" as = "style" id = "css">
-        <noscript><link rel = "stylesheet" href = "/index.css"></noscript>
+<body>
+    <h3 id="header">Pyx's Statuspage</h3>
+    <p>This page is not intended for general use and mostly serves as a backend/API host on Cloudflare. To view the status of services, please visit the page on <a
+            href="https://pyxfluff.dev/statuspage">my website</a> for up to date status information.</p>
+    <footer><a href="https://pyxfluff.dev">
+            < Return home</a>
+    </footer>
 
-        <!-- JS -->
-        <script src = "/js/popper-lite.min.js" async></script>
-        <script src = "/js/main.js" async></script>
-    </body>
+    <!-- Deferred CSS -->
+    <link rel="preload" href="/index.css" as="style" id="css">
+    <noscript>
+        <link rel="stylesheet" href="/index.css">
+    </noscript>
+</body>
+
 </html>
