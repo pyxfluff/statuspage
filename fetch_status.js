@@ -1,5 +1,5 @@
 // Copyright (c) 2024 iiPython
-// also moreso pyxfluff 2025
+// also moreso pyxfluff 2025 - 2026
 
 const services = [
   { name: "Homepage", url: "https://pyxfluff.dev" },
