@@ -1,5 +1,5 @@
 // Copyright (c) 2024 iiPython
-// also moreso pyxfluff 2025 - 2026
+// also moreso pyxfluff 2025
 
 const services = [
   { name: "Homepage", url: "https://pyxfluff.dev" },
@@ -26,22 +26,23 @@ async function fetch_status() {
       const start = performance.now();
       const result = await fetch(url, { redirect: "manual" });
       const up =
-        toString(result.status).startsWith("2") ||
-        toString(result.status).startsWith("3");
+        result.status.toString().startsWith("2") ||
+        result.status.toString().startsWith("3") ||
+        result.status.toString().startsWith("4");
 
       clearTimeout(timeout);
       slice.services[name] = {
         online: up,
         latency: Math.round(performance.now() - start),
         statusCode: result.status,
-        message: ""
+        message: "",
       };
     } catch {
       slice.services[name] = {
         online: false,
         latency: 0,
         statusCode: 500,
-        message: "Statuspage backend did not process this run."
+        message: "Statuspage backend did not process this run.",
       };
     }
   }
@@ -57,7 +58,7 @@ export default {
         // Handle existing data
         let records =
           JSON.parse(await env.statuspage_data.get("records")) || [];
-        if (records.length === 350) records = records.slice(1);
+        if (records.length === 200) records = records.slice(1);
 
         // Go fetch status information
         records.push(await fetch_status());
@@ -66,5 +67,5 @@ export default {
         await env.statuspage_data.put("records", JSON.stringify(records));
       })(),
     );
-  }
+  },
 };
