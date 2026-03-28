@@ -35,14 +35,14 @@ async function fetch_status() {
         online: up,
         latency: Math.round(performance.now() - start),
         statusCode: result.status,
-        message: "",
+        message: ""
       };
     } catch {
       slice.services[name] = {
         online: false,
         latency: 0,
         statusCode: 500,
-        message: "Statuspage backend did not process this run.",
+        message: "Statuspage backend did not process this run."
       };
     }
   }
@@ -65,7 +65,7 @@ export default {
 
         // Save new data
         await env.statuspage_data.put("records", JSON.stringify(records));
-      })(),
+      })()
     );
-  },
+  }
 };
